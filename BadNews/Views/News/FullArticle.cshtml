@@ -1,6 +1,8 @@
-﻿@using BadNews.Elevation
+﻿
+@using BadNews.Elevation
 @model BadNews.Models.News.FullArticleModel
 
+        
 <main role="main" class="container">
     <div class="row">
         <div class="col-md-8 news-main">
@@ -19,7 +21,7 @@
                 @Html.Raw(Model.Article.ContentHtml)
             </div>
             <div id="comments" />
-            <label>
+            @* <label>
                 Пользователь <input id="userInput">
             </label>
             <label>
@@ -27,7 +29,8 @@
             </label>
             <div>
                 <button id="sendButton">Отправить</button>
-            </div>
+            </div> *@
+            @(await Html.RenderComponentAsync<BadNews.BlazorComponents.Comments>(RenderMode.ServerPrerendered))
         </div>
 
         <aside class="col-md-4 news-sidebar">
@@ -44,7 +47,7 @@
 </footer>
 
 
-<script src="/lib/jquery/dist/jquery.min.js"></script>
+@* <script src="/lib/jquery/dist/jquery.min.js"></script>
 <script src="/js/signalr/dist/browser/signalr.js"></script>
 <script type="text/javascript">
     $.get(`/api/news/@Model.Article.Id.ToString()/comments`, function(data) {
@@ -86,4 +89,4 @@
         event.preventDefault();
     });
 
-</script>
+</script> *@
